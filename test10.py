@@ -1,10 +1,38 @@
-import sys
+import sys, os 
+
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import (
+    QApplication, 
+    QMainWindow, 
+    QWidget, 
+    QLabel, 
+    QPushButton,
+    QComboBox, 
+    QGroupBox, 
+    QGridLayout, 
+    QVBoxLayout, 
+    QHBoxLayout,
+    QSlider, 
+    QSpinBox, 
+    QDoubleSpinBox, 
+    QRadioButton, 
+    QLCDNumber
+)
+
+
+from PyQt5.QtCore import Qt
+
+basedir = os.path.dirname(__file__)
 
 # ================= MATPLOTLIB CANVAS =================
 class MplCanvas(FigureCanvas):
@@ -29,8 +57,10 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Temp + Current GUI")
+        self.setWindowTitle("IITD EQUIP LAB - LMTC GUI")
+        self.setWindowIcon(QIcon("OC_Python - Release - Test 10/OC_Python - Release/iitdelhilogo.ico"))
         self.setMinimumSize(1200, 750)
+        
 
         self.setStyleSheet("""
         QFrame {
@@ -80,7 +110,7 @@ class MainWindow(QMainWindow):
         headerLayout.addWidget(QLabel("IITD EQUIP LAB"))
         headerLayout.addStretch()
 
-        title = QLabel("Temp + Current GUI")
+        title = QLabel("LMTC - GUI")
         title.setFont(QFont("Arial", 18, QFont.Bold))
         headerLayout.addWidget(title)
 
@@ -241,6 +271,8 @@ class MainWindow(QMainWindow):
 # ================= RUN =================
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(os.path.join(basedir, "icons", "iitdelhilogo.ico")))
+    app.setWindowIcon(QtGui.QIcon("iitdelhilogo.ico"))
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
